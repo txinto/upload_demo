@@ -6,7 +6,9 @@ class Attachment < ActiveRecord::Base
     name :string
     timestamps
   end
-  attr_accessible :name
+  attr_accessible :name, :project, :project_id
+  
+  belongs_to :project, :inverse_of => :attachments, :creator => :true
   
   # --- Permissions --- #
 

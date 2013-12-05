@@ -6,8 +6,12 @@ class Project < ActiveRecord::Base
     name :string
     timestamps
   end
-  attr_accessible :name
+  attr_accessible :name, :attachments
 
+  has_many :attachments, :dependent => :destroy
+  
+  children :attachments
+    
   # --- Permissions --- #
 
   def create_permitted?
