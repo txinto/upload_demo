@@ -16,3 +16,4 @@
 app/views/taglibs/auto/**/*
 config/hobo_routes.rb
 lib/attachments/*
+lib/photos/*

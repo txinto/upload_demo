@@ -4,10 +4,19 @@ class Project < ActiveRecord::Base
 
   fields do
     name :string
+    description :text
     timestamps
   end
-  attr_accessible :name, :attachments
+  attr_accessible :name, :attachments, :photo, :photo_file_name, :description
 
+  has_attached_file :photo,
+    :styles => {
+    :medium => ["200x138#", :png],
+    :thumb => ["100x100>", :png] },
+    :whiny => false,
+    :path => 'lib/photos/:style/:filename',
+    :url => '/projects/:id?style=:style'
+  
   has_many :attachments, :dependent => :destroy
   
   children :attachments

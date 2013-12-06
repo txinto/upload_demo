@@ -1,4 +1,15 @@
 <show-page>
+  <field-list: replace>
+    <div class="row columns">
+      <div class="span6">
+        <single-field-list fields="name,description"/>
+      </div>
+      <div class="span3">
+        Project photo:
+        <attached-photo part="photo"/>
+      </div>
+    </div>
+  </field-list:>
   <collection-section: replace>
     <file-attachments/>
   </collection-section:>
@@ -11,7 +22,7 @@
         <span class="fileinput-button" style="margin-left:8px;">
           <a class="btn btn-success" style="margin:5px" href="#"
              onclick="$('#fileupload input[type=file]').trigger('click');
-    return false;">
+                 return false;">
             <i class="icon-plus icon-white"></i>Add or drag file
           </a>
         </span>
@@ -19,6 +30,7 @@
                data-url="/attachments?project_id=#{@project.id}"/>
       </form>
     </legend>
+    <br/>
     <div class="progress progress-striped active hide" id="upload-progress">
       <div class="bar" style="width:0%"></div>
     </div>
@@ -48,4 +60,14 @@
     </div>
   </header:>
   </card>
+</def>
+
+<def tag="attached-photo">
+  <a href="&this.photo.url(:original)" class="thumbnail">
+    <img src="&this.photo.url(:medium)"/>
+  </a>
+  <a class="btn btn-success" style="margin:5px" href="#"
+     onclick="$('input[type=file]').trigger('click');">
+    <i class="icon-plus icon-white"></i>
+  </a>
 </def>

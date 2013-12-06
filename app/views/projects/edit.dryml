@@ -1,0 +1,45 @@
+<edit-page content-size="9">
+  <aside:>
+    Hola! Soy el aside :)
+    <!--The photo form has to be outside of the main form-->
+    <attached-photo-form/>
+  </aside:><aside:>
+    Hola! Soy el aside :)
+    <!--The photo form has to be outside of the main form-->
+    <attached-photo-form/>
+  </aside:>
+  <form:>
+    <field-list: replace>
+      <div class="row columns">
+        <div class="span6">
+          <single-field-list fields="name,description"/>
+        </div>
+        <div class="span3">
+          <attached-photo part="photo"/>
+        </div>
+      </div>
+    </field-list:>
+  </form:>
+</edit-page>
+<def tag="attached-photo-form">
+  <form action="" class="pull-left" id="photo-fileupload">
+    <span class="btn btn-mini fileinput-button"
+          style="display:none;">
+      <input type="file" id="fileupload-input"
+             name="project[photo]" multiple="true"
+             data-url="&project_path(@project)"/>
+    </span>
+  </form>
+  <div class="progress progress-striped active hide" id="upload-progress">
+    <div class="bar" style="width:0%"></div>
+  </div>
+</def>
+<def tag="attached-photo">
+  <a href="&this.photo.url(:original)" class="thumbnail">
+    <img src="&this.photo.url(:medium)"/>
+  </a>
+  <a class="btn btn-success" style="margin:5px" href="#"
+     onclick="$('input[type=file]').trigger('click');">
+    <i class="icon-plus icon-white"></i>
+  </a>
+</def>

@@ -20,3 +20,28 @@ $ ->
       $('.content-body form').submit()
       $('#ajax-progress-text').hide()
   , 3000
+
+$ ->
+  # Start of file upload
+  $('#photo-fileupload').fileupload({
+    dataType: 'script',
+    url: $('#fileupload-input').data('url') + '?render[0][id]=photo&render[0][part_context]=' + $("[data-rapid-page-data]").data('rapid-page-data').hobo_parts['photo'],
+    type: 'PUT', # PUT is the default for the Hobo update routes
+    fileInput: $('#fileupload-input')
+  });
+  
+  $('#photo-fileupload').bind('fileuploadstart', (e) ->
+    $('#upload-progress .bar').width('0%');
+    $('#upload-progress').fadeIn();
+  )
+  
+  $('#photo-fileupload').bind('fileuploadprogress', (e, data) ->
+    percentage = data.loaded * 100 / data.total
+    $('#upload-progress .bar').width(percentage+'%');
+  );
+  
+  $('#photo-fileupload').bind('fileuploaddone', (e, data) ->
+    $('#upload-progress .bar').width('100%');
+    $('#upload-progress').fadeOut();
+  )
+  # End of file upload
