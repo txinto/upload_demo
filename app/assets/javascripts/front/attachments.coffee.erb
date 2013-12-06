@@ -1,0 +1,23 @@
+$ ->
+  # Start of file upload
+  $('#fileupload').fileupload({
+    dataType: 'script',
+    url: $('#fileupload-input').data('url') + '&render[0][id]=attachments&render[0][part_context]=' + $("[data-rapid-page-data]").data('rapid-page-data').hobo_parts['attachments']
+    
+  });
+  
+  $('#fileupload').bind('fileuploadstart', (e) ->
+    $('#upload-progress .bar').width('0%');
+    $('#upload-progress').fadeIn();
+  )
+  
+  $('#fileupload').bind('fileuploadprogress', (e, data) ->
+    percentage = data.loaded * 100 / data.total
+    $('#upload-progress .bar').width(percentage+'%');
+  );
+  
+  $('#fileupload').bind('fileuploaddone', (e, data) ->
+    $('#upload-progress .bar').width('100%');
+    $('#upload-progress').fadeOut();
+  )
+  # End of file upload
