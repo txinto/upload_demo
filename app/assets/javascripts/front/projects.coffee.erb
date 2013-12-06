@@ -1,0 +1,22 @@
+$ ->
+  # Función que se ejecuta con cualquier cambio
+  window.form_change = () ->
+    $('#edit-status').html('Pending changes')
+    $('#edit-status').removeClass('alert-success')    
+
+  # On pressing any key, change the status
+  $('.project.edit-page').keypress ->
+    form_change();
+  
+  # Make it work for selects changed with the mouse
+  $('.project.edit-page select').click ->
+    form_change();
+    
+  # Run this code every 3 seconds
+  # If there are changes, send the form with Ajax
+  setInterval ->
+    if($('#edit-status').html()=='Pending changes')
+      $('#edit-status').html("<img src='/assets/ajax-loader.gif'/>&nbsp;Guardando cambios")
+      $('.content-body form').submit()
+      $('#ajax-progress-text').hide()
+  , 3000
