@@ -6,7 +6,7 @@ class Attachment < ActiveRecord::Base
     name :string
     timestamps
   end
-  attr_accessible :name, :project, :project_id
+  attr_accessible :name, :project, :project_id, :document, :document_file_name
   
   belongs_to :project, :inverse_of => :attachments, :creator => :true
   
@@ -32,7 +32,7 @@ class Attachment < ActiveRecord::Base
     return "#{splitted[0].first(18)}.#{splitted[1]}"+
       " (#{I18n.l created_at.to_date})"
   end
-    
+  
   # --- Permissions --- #
 
   def create_permitted?
